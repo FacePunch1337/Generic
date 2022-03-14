@@ -12,17 +12,15 @@ namespace Generic
             {
                     
             }
-            
             public Number<T> Plus(Number<T> n)
             {
-                var tn = typeof(T).Name;
-                if(tn == "Int32")
+                var tn = typeof(T).Name; 
+                if (tn == "Int32")
                 {
                     return new Number<T>
                     {
                         Value = (T)(object)(Convert.ToInt32(n.Value) + Convert.ToInt32(this.Value))
                     };
-
 
                 }
 
@@ -33,13 +31,34 @@ namespace Generic
                         Value = (T)(object)(Convert.ToSingle(n.Value) + Convert.ToSingle(this.Value))
                     };
 
-
                 }
 
                 throw new Exception("Types noes not support");
             }
 
-            public static Number<T> operator +(Number<T> a, Number<T> b) => a + b;
+            public static Number<T> operator +(Number<T> a, Number<T> b )
+            {
+                var tn = typeof(T).Name;
+                if (tn == "Int32")
+                {
+                    return new Number<T>
+                    {
+                        Value = (T)(object)(Convert.ToInt32(a.Value) + Convert.ToInt32(b.Value))
+                    };
+
+                }
+
+                if (tn == "Single")
+                {
+                    return new Number<T>
+                    {
+                        Value = (T)(object)(Convert.ToSingle(a.Value) + Convert.ToSingle(b.Value))
+                    };
+
+                }
+
+                throw new Exception("Types noes not support");
+            }
             
     }
 
@@ -62,33 +81,29 @@ namespace Generic
                 Number<T> sum = new Number<T>();
                 foreach (var n in numbers)
                 {
-                    sum = sum.Plus(n);
+                    sum = n + n;
+                    //sum = sum.Plus(n);
                 }
                 return sum;
-            }
+             }
 
 
-        }
+         }
 
-        static void Main(string[] args)
-        {
-            //Console.WriteLine("Hello World!");
-
-            /*var x = new Number<int>() { Value = 10};
-            var y = new Number<float>() { Value = .10f };*/
-
+         static void Main(string[] args)
+         {
             var arr = new NumberArray<int>();
-            arr.Add(new Number<int>() { Value = 10 });
-            arr.Add(new Number<int>() { Value = 20 });
-            arr.Add(new Number<int>() { Value = 30 });
+                arr.Add(new Number<int>() { Value = 10 });
+                arr.Add(new Number<int>() { Value = 20 });
+                arr.Add(new Number<int>() { Value = 30 });
             Console.WriteLine(arr.Mean().Value);
 
             var arrf = new NumberArray<float>();
-            arrf.Add(new Number<float>() { Value = .10f });
-            arrf.Add(new Number<float>() { Value = .20f });
-            arrf.Add(new Number<float>() { Value = .30f });
-            Console.WriteLine(arrf.Mean().Value);
-           
+                arrf.Add(new Number<float>() { Value = .10f });
+                arrf.Add(new Number<float>() { Value = .20f });
+                arrf.Add(new Number<float>() { Value = .30f });
+             Console.WriteLine(arrf.Mean().Value);
+
         }
 
         
