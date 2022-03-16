@@ -52,13 +52,14 @@ namespace Generic
 
                 if (!list.Any(x => x is T2))
                 {
-                   list.Add(new T2());
+                    list.Add(new T2());
+                    return true;
                 }
-                else throw new Exception($"The list cannot contain elements of the same type");
-
-               
-
-                return true;
+                else
+                {
+                    throw new Exception($"The list cannot contain elements of the same type");
+                    return false;
+                }
 
             }
 
@@ -224,7 +225,7 @@ namespace Generic
             throw new Exception("error");
         }
 
-        static void Main1(string[] args)
+        static void Main(string[] args)
         {
             Set<Element> set = new Set<Element>();
             set.Add<ElementOne>();
@@ -253,7 +254,7 @@ namespace Generic
             var y = MakeRandom<float>();
             Console.WriteLine($"{x}\n{y}");
         }
-        static void Main(string[] args)
+        /*static void Main(string[] args)
         {
             var arr = new NumberArray<int>();
             arr.Add(new Number<int>() { Value = 10 });
@@ -267,7 +268,7 @@ namespace Generic
             arrf.Add(new Number<float>() { Value = .30f });
             Console.WriteLine(arrf.Mean().Value);
 
-        }
+        }*/
     }
 
             
